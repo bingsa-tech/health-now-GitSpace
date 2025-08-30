@@ -15,7 +15,7 @@ app.use(
     origin: [
       "http://localhost:5173", // Vite dev (frontend)
       "http://127.0.0.1:5173",
-      "http://localhost:8080", // Nginx prod
+      "https://health-now-frontend.netlify.app", // netlify site
     ],
     credentials: true,
   })
