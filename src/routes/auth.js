@@ -117,5 +117,18 @@ router.post("/login", async (req, res) => {
 router.get("/protected", authMiddleware, async (req, res) => {
   res.json({ message: "Accès autorisé ✅", user: req.user });
 });
+router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-passwordHash");
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé" });
+    }
+    res.json({ user });
+  } catch (err) {
+    console.error("❌ Erreur /me:", err);
+    res.status(500).json({ message: "Erreur serveur", error: err.message });
+  }
+});
+
 
 export default router;
