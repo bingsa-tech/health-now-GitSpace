@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import chatRoutes from "./routes/chat.js";
 import authRoutes from "./routes/auth.js";
 import authMiddleware from "./middleware/auth.js";
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(
     credentials: true,
   })
 );
+app.use("/api/chat", chatRoutes);
 
 // Routes
 app.get("/api/health", (req, res) => res.json({ ok: true }));
